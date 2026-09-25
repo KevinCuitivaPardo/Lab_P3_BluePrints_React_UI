@@ -1,7 +1,9 @@
 import '@testing-library/jest-dom'
 
 // ---- Canvas mock para jsdom ----
-if (!HTMLCanvasElement.prototype.getContext) {
+// jsdom define getContext pero no lo implementa (retorna null), así que se
+// sobreescribe siempre en lugar de solo cuando falta.
+{
   HTMLCanvasElement.prototype.getContext = () => {
     const noop = () => {}
     return {

@@ -52,10 +52,14 @@ VITE_API_BASE_URL=http://localhost:8080/api
 ```carpetas
 blueprints-react-lab/
 ├─ src/
-│  ├─ components/
+│  ├─ components/            # BlueprintCanvas, BlueprintForm, BlueprintList, PrivateRoute
 │  ├─ features/blueprints/blueprintsSlice.js
 │  ├─ pages/
-│  ├─ services/apiClient.js   # axios + interceptores JWT
+│  ├─ services/
+│  │  ├─ httpClient.js        # instancia de axios + interceptores JWT
+│  │  ├─ apimock.js           # datos de prueba en memoria
+│  │  ├─ apiclient.js         # consume el API REST real con axios
+│  │  └─ blueprintsService.js # elige apimock/apiclient según VITE_USE_MOCK
 │  ├─ store/index.js          # Redux Toolkit
 │  ├─ App.jsx, main.jsx, styles.css
 ├─ tests/
@@ -184,3 +188,14 @@ VITE_USE_MOCK=true
 - **Dark mode** y diseño responsive.
 
 > Este proyecto es un punto de partida para que tus estudiantes evolucionen el cliente clásico de Blueprints a una SPA moderna con prácticas de la industria.
+
+---
+
+## Usuarios de prueba (modo mock)
+
+Con `VITE_USE_MOCK=true` (ver [.env.example](./.env.example)) el servicio `apimock` ya trae autores y blueprints de prueba, sin necesidad de backend.
+
+Para probar la búsqueda, poner en el campo **Author**:
+
+- `juan.perez` → blueprints `casa` (6 puntos) y `garage` (4 puntos)
+- `maria.gomez` → blueprints `piscina` (5 puntos) y `jardin` (5 puntos)
